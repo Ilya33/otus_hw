@@ -2,6 +2,7 @@ package hw02unpackstring
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 	"unicode"
 	"unicode/utf8"
@@ -47,7 +48,9 @@ func Unpack(s string) (string, error) {
 
 		default:
 			if unicode.IsDigit(currentRune) {
-				result.WriteString(strings.Repeat(string(lastRune), int(currentRune-'0')))
+				//result.WriteString(strings.Repeat(string(lastRune), int(currentRune-'0'))) // it's better
+				times, _ := strconv.Atoi(string(currentRune)) // what would happen? it's a Digit 100%
+				result.WriteString(strings.Repeat(string(lastRune), times))
 
 				state = StateNone
 			} else {
